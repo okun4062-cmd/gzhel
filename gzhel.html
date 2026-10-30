@@ -26,22 +26,25 @@
   --font-display:"Prata","Cormorant Garamond",Georgia,"Times New Roman",serif;
   --font-body:"Golos Text","Segoe UI",Roboto,system-ui,-apple-system,sans-serif;
   --r-lg:20px;--r-md:14px;--r-sm:10px;
+  --art-bg:#f4f7fe;
+  --nav-bg:rgba(238,242,250,.86);
+  --pattern:var(--pattern-l,none);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0a1230;--surface:#111c44;--surface-2:#16224f;--ink:#e7ecff;--muted:#a3b1d9;--line:#26346a;
   --accent:#7d9dff;--accent-ink:#0a1230;--accent-soft:#1d2b60;--good:#5fd39a;--warn:#ffb27a;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);color-scheme:dark}}
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);--art-bg:#18245a;--nav-bg:rgba(10,18,48,.86);--pattern:var(--pattern-d,none);color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0a1230;--surface:#111c44;--surface-2:#16224f;--ink:#e7ecff;--muted:#a3b1d9;--line:#26346a;
   --accent:#7d9dff;--accent-ink:#0a1230;--accent-soft:#1d2b60;--good:#5fd39a;--warn:#ffb27a;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);color-scheme:dark}
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);--art-bg:#18245a;--nav-bg:rgba(10,18,48,.86);--pattern:var(--pattern-d,none);color-scheme:dark}
 
 [hidden]{display:none!important}
 html,body{height:100%}
-body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.45;-webkit-tap-highlight-color:transparent}
+body{background-color:var(--bg);background-image:var(--pattern);background-size:300px 300px;color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.45;-webkit-tap-highlight-color:transparent}
 *{box-sizing:border-box}
 button{font:inherit;color:inherit}
-#app{max-width:480px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;background:var(--bg)}
+#app{max-width:1240px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
 .screen{flex:1;display:flex;flex-direction:column;gap:14px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:8px 20px}
 h1,h2,h3{margin:0;font-weight:400;text-wrap:balance}
 .display{font-family:var(--font-display)}
@@ -149,13 +152,12 @@ p{margin:0}
 .mk-head{display:flex;align-items:center;gap:10px}
 .mk-head .count{flex:1}
 .gal{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.gal button{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-md);padding:8px;cursor:pointer;display:flex;flex-direction:column;gap:6px;align-items:stretch;text-align:left}
-.gal img{width:100%;aspect-ratio:1;border-radius:10px;display:block;background:#fff}
-.gal span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.gal .item{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-md);padding:8px;cursor:pointer;display:flex;flex-direction:column;gap:6px;align-items:stretch;text-align:left}
+.gal .item img{width:100%;aspect-ratio:1;border-radius:10px;display:block;background:#fff}
+.gal .item span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 .empty{text-align:center;padding:30px 10px;color:var(--muted);display:grid;gap:12px;justify-items:center}
 
 /* practice reference */
-body.wide #app{max-width:1080px}
 .pgrid{display:grid;gap:14px}
 .pmain{display:grid;gap:14px;min-width:0}
 .ref{gap:10px}
@@ -215,28 +217,172 @@ body.wide #app{max-width:1080px}
 .sheet img.out{width:100%;border-radius:16px;background:#f3f6fd}
 .toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:14px;max-width:calc(100% - 32px);text-align:center;box-shadow:var(--shadow)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== wide layouts ===== */
+html,body{margin:0}
+img{max-width:100%}
+.stat{text-align:center}
+.corner{display:none}
+.strip button{width:68px;font-size:10px;overflow-wrap:anywhere;line-height:1.2}
+.pctl .seg{display:grid;grid-template-columns:repeat(3,1fr);width:100%}
+.pctl .seg button{padding:6px 4px;font-size:12px}
+@media (max-width:560px){
+  #homeEls.elrow{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+  .seltools{gap:4px}
+  .seltools .icon-btn{width:37px;height:37px}
+  .seltools .icon-btn svg{width:19px;height:19px}
+  #homeEls.elrow button{padding:8px 2px 6px;font-size:10px;overflow-wrap:anywhere;line-height:1.2}
+  #homeEls.elrow img{width:40px;height:40px}
+  .steps3 .art{aspect-ratio:2/1}
+}
+.screen{width:100%;max-width:600px;margin-inline:auto}
+.topnav{display:none}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-family:var(--font-display);font-size:20px;white-space:nowrap}
+.brand canvas{width:38px;height:38px;display:block}
+.tnav-list{display:flex;gap:4px;margin-left:auto}
+.tnav{border:0;background:transparent;padding:8px 16px;border-radius:99px;font-size:14.5px;font-weight:500;color:var(--muted);cursor:pointer}
+.tnav:hover{color:var(--ink);background:var(--accent-soft)}
+.tnav[aria-current="page"]{background:var(--accent);color:var(--accent-ink)}
+.tn-stat{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;border:1px solid var(--line);border-radius:99px;padding:6px 12px;background:var(--surface)}
+.tn-stat b{color:var(--accent);font-weight:700}
+
+/* home */
+#s-home{text-align:center;padding-top:28px}
+.hero{display:grid;gap:18px;grid-template-areas:"title" "art" "cta";justify-items:center}
+.hero-title{grid-area:title;display:grid;gap:12px;position:relative;z-index:1}
+.hero-wrap{grid-area:art}
+.hero-cta{grid-area:cta;display:grid;gap:12px;width:min(100%,360px)}
+.hero-cta .home-actions,.hero-cta .stats{width:100%;margin:0}
+.eyebrow{margin:0;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.home-sec{display:grid;gap:14px;margin-top:26px;text-align:left}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.sec-title{font-family:var(--font-display);font-size:26px;font-weight:400;margin:0}
+.steps3{display:grid;gap:12px}
+.step-card{position:relative;display:grid;gap:6px;align-content:start;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:12px 12px 16px;cursor:pointer;box-shadow:var(--shadow);transition:transform .2s ease,box-shadow .2s ease}
+.step-card:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(15,37,101,.08),0 14px 30px rgba(15,37,101,.12)}
+.step-card .art{width:100%;aspect-ratio:16/10;border-radius:14px;background:var(--art-bg);display:block;margin-bottom:6px}
+.step-card b{font-family:var(--font-display);font-weight:400;font-size:22px;padding-inline:4px}
+.step-card .d{font-size:14px;color:var(--muted);padding-inline:4px}
+.step-card .go-l{font-size:13.5px;font-weight:600;color:var(--accent);padding-inline:4px;margin-top:4px}
+.step-n{position:absolute;top:20px;left:20px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:700;font-size:14px;box-shadow:0 4px 10px rgba(28,69,179,.3)}
+.elrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.elrow button{display:grid;justify-items:center;gap:3px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 6px 8px;cursor:pointer;font-size:12.5px;color:var(--ink);transition:border-color .2s,transform .2s}
+.elrow button:hover{border-color:var(--accent);transform:translateY(-2px)}
+.elrow img{width:58px;height:58px;border-radius:10px;background:#fff}
+.elrow .s{font-size:11px;color:var(--accent);letter-spacing:1px;min-height:14px}
+.elrow button.locked img{filter:grayscale(1) opacity(.4)}
+.empty canvas{width:220px;height:220px;opacity:.6}
+.empty h3{font-family:var(--font-display);font-weight:400;font-size:26px;color:var(--ink)}
+.empty p{max-width:36ch}
+
+/* abc / practice / maker blocks */
+.abc-layout,.mk-layout{display:grid;gap:14px}
+.abc-main,.mk-canvas,.mk-side{display:grid;gap:14px;min-width:0;align-content:start}
+.pctl{display:grid;gap:14px;min-width:0;align-content:start}
+.pmain .stage{max-width:min(100%,calc(100vh - 200px));margin-inline:auto}
+@media (min-width:700px){.steps3{grid-template-columns:repeat(3,1fr)}}
+
+@media (min-width:900px){
+  .screen{max-width:none;padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px));padding-block:20px 48px;gap:18px}
+  .tabbar{display:none!important}
+  .topnav{display:block;position:sticky;top:env(safe-area-inset-top,0px);z-index:8;background:var(--nav-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .tn-in{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:20px;padding-block:12px;padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
+  .bar{grid-template-columns:minmax(0,1fr) auto;min-height:56px}
+  .bar>.icon-btn:first-child{display:none}
+  .bar h2{text-align:left;font-size:34px}
+  .bar>span:last-child:empty{display:none}
+  .corner{display:none}
+
+  #s-home{text-align:left;padding-top:36px}
+  .hero{grid-template-columns:minmax(0,1fr) minmax(0,540px);grid-template-areas:"title art" "cta art";justify-items:start;align-items:center;column-gap:64px;row-gap:30px;min-height:min(640px,calc(100vh - 120px))}
+  .hero-title{align-self:end;gap:18px}
+  .hero-cta{align-self:start;width:min(100%,460px)}
+  #s-home h1{font-size:clamp(54px,5.6vw,80px);line-height:1.04}
+  #s-home .lead{margin:0;font-size:18px;max-width:34ch}
+  .hero-wrap{width:100%;max-width:540px}
+  .home-actions{grid-template-columns:1fr 1fr}
+  .home-sec{margin-top:40px;gap:18px}
+  .sec-title{font-size:32px}
+  .elrow{grid-template-columns:repeat(10,minmax(0,1fr))}
+
+  .abc-layout{grid-template-columns:360px minmax(0,1fr);gap:24px;align-items:start}
+  .abc-side{position:sticky;top:88px}
+  .abc-side .detail{grid-template-columns:1fr}
+  .abc-side .detail .demo{aspect-ratio:4/3}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px}
+  .card{padding:16px 10px 12px}
+  .card img{width:88px;height:88px}
+
+  .mk-layout{grid-template-columns:minmax(0,1fr) 380px;gap:28px;align-items:start}
+  .mk-canvas .stage{max-width:min(100%,calc(100vh - 230px));margin-inline:auto}
+  .mk-side{position:sticky;top:88px}
+  .strip{flex-wrap:wrap;overflow:visible}
+  .seltools{justify-content:flex-start}
+  .gal{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+}
+@media (min-width:820px){
+  .pgrid{grid-template-columns:280px minmax(0,1fr);justify-content:stretch;align-items:start}
+  .ref{grid-row:1/span 2;position:sticky;top:88px}
+  .pmain,.pctl{grid-column:2}
+}
+@media (min-width:1200px){
+  .pgrid{grid-template-columns:280px minmax(0,1fr) 300px}
+  .ref{grid-row:auto}
+  .pctl{grid-column:3;position:sticky;top:88px}
+}
 </style>
 
 </head>
 <body>
+<header class="topnav" id="topnav">
+  <div class="tn-in">
+    <a class="brand" href="#home" aria-label="На главную"><canvas id="brandMark" width="96" height="96" aria-hidden="true"></canvas><span>Азбука гжели</span></a>
+    <nav class="tnav-list" aria-label="Разделы">
+      <button class="tnav" data-go="abc">Азбука</button>
+      <button class="tnav" data-go="practice">Мастерская</button>
+      <button class="tnav" data-go="maker">Конструктор</button>
+      <button class="tnav" data-go="gallery">Мои узоры</button>
+    </nav>
+    <span class="tn-stat" title="Звёзды за упражнения"><b id="tnStars">0</b> ★ из 30</span>
+  </div>
+</header>
 <div id="app">
   <!-- HOME -->
   <section class="screen" id="s-home" hidden>
     <canvas class="corner tl" id="cornerL" width="220" height="220" aria-hidden="true"></canvas>
     <canvas class="corner tr" id="cornerR" width="220" height="220" aria-hidden="true"></canvas>
-    <h1>Азбука<br>гжельской<br>росписи</h1>
-    <p class="lead">Изучай гжель шаг за шагом: от простой капли до розана — и собирай свои узоры на тарелке.</p>
-    <div class="hero-wrap"><canvas id="heroCanvas" aria-label="Гжельский букет"></canvas></div>
-    <div class="home-actions">
-      <button class="btn block" id="btnStart">Начать обучение
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      <button class="btn ghost block" id="btnHomeMaker">Конструктор узора</button>
+    <div class="hero">
+      <div class="hero-title">
+        <p class="eyebrow">Кобальтовая роспись по фарфору</p>
+        <h1>Азбука<br>гжельской<br>росписи</h1>
+        <p class="lead">Изучай гжель шаг за шагом: от простой капли до розана — и собирай свои узоры на тарелке.</p>
+      </div>
+      <div class="hero-wrap"><canvas id="heroCanvas" aria-label="Тарелка с гжельским букетом"></canvas></div>
+      <div class="hero-cta">
+        <div class="home-actions">
+          <button class="btn block" id="btnStart">Начать обучение
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button class="btn ghost block" id="btnHomeMaker">Конструктор узора</button>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="stLearned">0/10</b><span>освоено</span></div>
+          <div class="stat"><b id="stStars">0</b><span>звёзд из 30</span></div>
+          <div class="stat"><b id="stWorks">0</b><span>узоров</span></div>
+        </div>
+      </div>
     </div>
-    <div class="stats">
-      <div class="stat"><b id="stLearned">0/10</b><span>освоено</span></div>
-      <div class="stat"><b id="stStars">0</b><span>звёзд из 30</span></div>
-      <div class="stat"><b id="stWorks">0</b><span>узоров</span></div>
-    </div>
+    <section class="home-sec" aria-labelledby="hs1">
+      <h2 class="sec-title" id="hs1">Три шага к своей росписи</h2>
+      <div class="steps3">
+        <button class="step-card" data-go="abc"><canvas class="art" id="art1" aria-hidden="true"></canvas><span class="step-n">1</span><b>Азбука</b><span class="d">Десять элементов гжели: от капли до розана. У каждого — шаги техники и анимация мазков.</span><span class="go-l">Открыть азбуку →</span></button>
+        <button class="step-card" data-go="practice"><canvas class="art" id="art2" aria-hidden="true"></canvas><span class="step-n">2</span><b>Мастерская</b><span class="d">Рисуйте кистью по контуру. Проверка оценит форму и технику и объяснит каждую ошибку.</span><span class="go-l">Взять кисть →</span></button>
+        <button class="step-card" data-go="maker"><canvas class="art" id="art3" aria-hidden="true"></canvas><span class="step-n">3</span><b>Конструктор</b><span class="d">Соберите свою тарелку: повтор по кругу, зеркало, кайма. Готовый узор сохраните в галерею.</span><span class="go-l">Собрать узор →</span></button>
+      </div>
+    </section>
+    <section class="home-sec" aria-labelledby="hs2">
+      <div class="sec-head"><h2 class="sec-title" id="hs2">10 элементов азбуки</h2><button class="linkish" data-go="abc">Вся азбука →</button></div>
+      <div class="elrow" id="homeEls"></div>
+    </section>
   </section>
 
   <!-- ABC -->
@@ -246,6 +392,7 @@ body.wide #app{max-width:1080px}
       <h2>Азбука элементов</h2><span></span>
     </div>
     <div class="progress"><span id="abcCount">0 / 10</span><div class="track"><i id="abcBar" style="width:0"></i></div><span>освоено</span></div>
+    <div class="abc-layout"><div class="abc-side">
     <div class="detail" id="detail">
       <div class="demo" id="demoBox" role="button" tabindex="0" aria-label="Показать, как рисуется элемент">
         <canvas id="demoCanvas"></canvas>
@@ -260,8 +407,10 @@ body.wide #app{max-width:1080px}
       </div>
       <ol class="steps detail-full" id="dSteps"></ol>
     </div>
+    </div><div class="abc-main">
     <div class="grid" id="abcGrid"></div>
     <button class="linkish" id="unlockAll">Открыть все элементы без проверки</button>
+    </div></div>
   </section>
 
   <!-- PRACTICE -->
@@ -286,6 +435,8 @@ body.wide #app{max-width:1080px}
       </aside>
       <div class="pmain">
         <div class="stage" id="pStage"><canvas id="pCanvas" aria-label="Тарелка для практики: рисуйте по контуру"></canvas><span class="badge" id="pBadge">Мазок 1 из 1</span></div>
+      </div>
+      <div class="pctl">
         <div class="tools">
           <button class="tool" id="pHint"><span class="ic"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span>Подсказка</button>
           <button class="tool" id="pUndo"><span class="ic"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></span>Отменить</button>
@@ -315,6 +466,7 @@ body.wide #app{max-width:1080px}
       <h2>Конструктор узора</h2>
       <button class="icon-btn" data-go="gallery" aria-label="Мои узоры"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></button>
     </div>
+    <div class="mk-layout"><div class="mk-canvas">
     <div class="mk-head">
       <span class="count small muted" id="mCount">Элементов: 0</span>
       <button class="icon-btn" id="mUndo" aria-label="Отменить"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></button>
@@ -322,6 +474,7 @@ body.wide #app{max-width:1080px}
       <button class="icon-btn" id="mNew" aria-label="Новый узор"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button>
     </div>
     <div class="stage" id="mStage"><canvas id="mCanvas" aria-label="Тарелка: перетаскивайте элементы"></canvas><span class="badge" id="mBadge">Перемещение</span></div>
+    </div><div class="mk-side">
     <div class="seltools" id="mSel" aria-disabled="true">
       <button class="icon-btn" data-act="rotL" aria-label="Повернуть влево"><svg viewBox="0 0 24 24"><path d="M4 4v6h6"/><path d="M4.5 10A8 8 0 1 1 6 17"/></svg></button>
       <button class="icon-btn" data-act="rotR" aria-label="Повернуть вправо"><svg viewBox="0 0 24 24"><path d="M20 4v6h-6"/><path d="M19.5 10A8 8 0 1 0 18 17"/></svg></button>
@@ -345,6 +498,7 @@ body.wide #app{max-width:1080px}
         <div class="seg" id="mRim"><button data-v="none" aria-pressed="false">Нет</button><button data-v="line" aria-pressed="true">Линия</button><button data-v="beads" aria-pressed="false">Бусины</button><button data-v="wave" aria-pressed="false">Мазки</button><button data-v="net" aria-pressed="false">Сеточка</button></div></div>
     </div>
     <button class="btn block" id="mSave"><svg viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v6h8V3M8 21v-7h8v7"/></svg>Сохранить узор</button>
+    </div></div>
   </section>
 
   <!-- GALLERY -->
@@ -773,7 +927,8 @@ function route(){
   document.body.classList.toggle('wide',h==='practice');
   SCREENS.forEach(s=>{$('#s-'+s).hidden=s!==h;});
   $('#tabbar').hidden=h==='home';
-  document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-current',t.dataset.go===h?'page':'false'));
+  document.querySelectorAll('.tab,.tnav').forEach(t=>t.setAttribute('aria-current',t.dataset.go===h?'page':'false'));
+  $('#tnStars').textContent=totalStars();
   window.scrollTo(0,0);
   ({home:showHome,abc:showAbc,practice:showPractice,maker:showMaker,gallery:showGallery})[h]();
 }
@@ -787,17 +942,57 @@ function showHome(){
   $('#stWorks').textContent=gallery.length;
   requestAnimationFrame(()=>{
     const c=$('#heroCanvas');fitCanvas(c);
-    const x=c.getContext('2d');
-    // zoom in on the bouquet
-    const tmp=document.createElement('canvas');tmp.width=tmp.height=c.width;
-    renderComposition(tmp.getContext('2d'),{...SAMPLE,objs:SAMPLE.objs},{plate:false});
-    x.clearRect(0,0,c.width,c.height);
-    const z=1.24,w=c.width;x.drawImage(tmp,-(z-1)*w/2,-(z-1)*w/2*0.92,w*z,w*z);
+    renderComposition(c.getContext('2d'),SAMPLE);
+    drawArts();
+  });
+  const row=$('#homeEls');row.innerHTML='';
+  EL.forEach((el,i)=>{
+    const b=document.createElement('button'),lock=!isUnlocked(i);
+    if(lock)b.className='locked';
+    b.innerHTML='<img alt="" src="'+thumbs[el.id]+'"><span>'+el.name+'</span><span class="s">'+(lock?'':starsTxt(stars[el.id]||0))+'</span>';
+    b.onclick=()=>{selIdx=i;go('abc');};
+    row.appendChild(b);
   });
   [['#cornerL',[{id:'curl',x:120,y:110,rot:0.5,s:.7},{id:'berry',x:250,y:180,rot:-0.9,s:.75},{id:'leaf',x:110,y:260,rot:-2.4,s:.7}]],
    ['#cornerR',[{id:'tendril',x:150,y:150,rot:0.9,s:.8},{id:'bell',x:270,y:110,rot:-1.6,s:.7}]]].forEach(([sel,objs])=>{
     const c=$(sel),x=c.getContext('2d');renderComposition(x,{objs,strokes:[]},{plate:false});
   });
+}
+function artCtx(c){fitCanvas(c);const x=c.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);return x;}
+function drawElAt(x,el,cx,cy,size){
+  const [x0,y0,x1,y1]=el.bbox,s=size/Math.max(x1-x0,y1-y0);
+  x.save();x.setTransform(s,0,0,s,cx-s*(x0+x1)/2,cy-s*(y0+y1)/2);drawElement(x,el);x.restore();
+}
+function drawArts(){
+  let c=$('#art1');if(!c||!c.getBoundingClientRect().width)return;
+  let x=artCtx(c),W=c.width,H=c.height;
+  ['drop','shadow','curl','berry'].forEach((id,i)=>{
+    const cx=W*(0.14+0.24*i),cy=H*0.5,sz=Math.min(W*0.19,H*0.62);
+    x.fillStyle='#ffffff';x.beginPath();x.roundRect(cx-sz*0.62,cy-sz*0.62,sz*1.24,sz*1.24,sz*0.18);x.fill();
+    drawElAt(x,EL_BY_ID[id],cx,cy,sz);
+  });
+  c=$('#art2');x=artCtx(c);W=c.width;H=c.height;
+  const k=H*0.92/(2*134);x.setTransform(k,0,0,k,W/2,H/2);
+  drawPlate(x,134,'none');
+  const st=EL_BY_ID.drop.c[0];
+  x.setLineDash([4,4]);x.lineWidth=1.4;x.strokeStyle='rgba(28,69,179,0.6)';x.stroke(outlinePath(st));x.setLineDash([]);
+  drawStroke(x,st,{upto:st.pts.length*0.7});
+  const tip=st.pts[Math.floor(st.pts.length*0.7)-1];
+  x.save();x.translate(tip.x+6,tip.y+4);x.rotate(-0.6);
+  x.fillStyle='#8a5a2b';x.fillRect(-3,8,6,70);x.fillStyle='#c9ccd6';x.fillRect(-4,0,8,12);
+  x.fillStyle='#0b2479';x.beginPath();x.moveTo(-4,0);x.quadraticCurveTo(0,-16,4,0);x.fill();x.restore();
+  c=$('#art3');x=artCtx(c);W=c.width;H=c.height;
+  const t=document.createElement('canvas');t.width=t.height=Math.round(H*0.94);
+  renderComposition(t.getContext('2d'),{sym:8,mirror:false,rim:'beads',strokes:[],objs:[
+    {id:'shadow',x:200,y:84,rot:0.35,s:.42},{id:'leaf',x:200,y:146,rot:0,s:.26},{id:'drop',x:200,y:178,rot:Math.PI,s:.16}]});
+  x.drawImage(t,(W-t.width)/2,(H-t.height)/2);
+}
+function makePattern(color){
+  const N=300,c=document.createElement('canvas');c.width=c.height=N;const x=c.getContext('2d');
+  [['curl',60,60,0.3,0.2],['berry',220,90,-0.5,0.26],['leaf',110,210,2.4,0.24],['shadow',250,240,-0.8,0.22],['tendril',30,250,0.6,0.2]].forEach(([id,px,py,r,s])=>{
+    x.save();x.translate(px,py);x.rotate(r);x.scale(s,s);drawElement(x,EL_BY_ID[id]);x.restore();});
+  x.globalCompositeOperation='source-in';x.fillStyle=color;x.fillRect(0,0,N,N);
+  return 'url("'+c.toDataURL('image/png')+'")';
 }
 $('#btnStart').onclick=()=>go('abc');
 $('#btnHomeMaker').onclick=()=>go('maker');
@@ -832,7 +1027,7 @@ function showAbc(){
 function drawDemo(t){
   const c=$('#demoCanvas');fitCanvas(c);const x=c.getContext('2d'),el=EL[selIdx];
   x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);
-  const s=c.width/220;x.setTransform(s,0,0,s,c.width/2,c.height/2);
+  const s=Math.min(c.width,c.height)/220;x.setTransform(s,0,0,s,c.width/2,c.height/2);
   let left=t;
   for(const st of el.c){
     const dur=st.pts.length===1?350:Math.max(380,st.L*9);
@@ -1454,13 +1649,15 @@ function showGallery(){
   const g=$('#galGrid');
   if(!gallery.length){
     g.style.display='block';
-    g.innerHTML='<div class="empty"><p>Здесь появятся узоры, которые вы сохраните в конструкторе.</p><button class="btn" data-go="maker">Открыть конструктор</button></div>';
+    g.innerHTML='<div class="empty"><canvas id="emptyArt" aria-hidden="true"></canvas><h3>Пока пусто</h3><p>Соберите узор в конструкторе и нажмите «Сохранить узор» — тарелка появится здесь.</p><button class="btn" data-go="maker">Открыть конструктор</button></div>';
+    requestAnimationFrame(()=>{const c=$('#emptyArt');if(c){fitCanvas(c);renderComposition(c.getContext('2d'),SAMPLE);}});
     return;
   }
   g.style.display='';
   g.innerHTML='';
   gallery.forEach((it,i)=>{
     const b=document.createElement('button');
+    b.className='item';
     b.innerHTML='<img alt="Узор от '+it.date+'" src="'+it.thumb+'"><span>'+it.date+'</span>';
     b.onclick=()=>{
       const c=document.createElement('canvas');c.width=c.height=1200;
@@ -1482,6 +1679,11 @@ function showGallery(){
 
 /* ================= boot ================= */
 makeThumbs();
+try{
+  document.documentElement.style.setProperty('--pattern-l',makePattern('rgba(28,69,179,0.055)'));
+  document.documentElement.style.setProperty('--pattern-d',makePattern('rgba(138,166,236,0.06)'));
+}catch(e){}
+(function(){const c=$('#brandMark'),x=c.getContext('2d');drawElAt(x,EL_BY_ID.rose,48,48,88);})();
 buildStrip();
 (function initMaker(){
   const d=store.get('draft',null);
